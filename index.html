@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAFFER SADIQ - J. Jaffer Sadiq Portfolio</title>
+    <meta name="description" content="Portfolio of J. Jaffer Sadiq, a Financial Services Professional based in Coimbatore.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0000FF', // Blue
+                        secondary: '#3b82f6', // Blue
+                        accent: '#f59e0b', // Amber
+                        light: '#f3f4f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            animation: morph 8s ease-in-out infinite;
+        }
+        @keyframes morph {
+            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+        }
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-primary">JAFFER SADIQ</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-secondary transition">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-secondary transition">About</a>
+                    <a href="#experience" class="text-gray-600 hover:text-secondary transition">Experience</a>
+                    <a href="#education" class="text-gray-600 hover:text-secondary transition">Education</a>
+                    <a href="#contact" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Contact Me</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="#home" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">Home</a>
+            <a href="#about" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">About</a>
+            <a href="#experience" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">Experience</a>
+            <a href="#education" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">Education</a>
+            <a href="#contact" class="block px-4 py-2 text-secondary font-semibold hover:bg-gray-100">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left fade-in-up">
+                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-primary text-sm font-semibold mb-4">Financial Services Professional</span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">
+                        Hello, I'm <br>
+                        <span class="text-secondary">J. Jaffer Sadiq</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-2 italic">"No way then make a way"</p>
+                    <p class="text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
+                        Dedicated professional with experience in Mortgages, Loans, and Banking. 
+                        I strive to creatively apply knowledge to provide innovative solutions for organizational growth.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#contact" class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-900 transition shadow-lg flex items-center justify-center gap-2">
+                            <i class="fas fa-paper-plane"></i> Get in Touch
+                        </a>
+                        <a href="#experience" class="bg-white text-primary border border-gray-300 px-8 py-3 rounded-lg hover:bg-gray-50 transition shadow flex items-center justify-center gap-2">
+                            <i class="fas fa-briefcase"></i> View Experience
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center relative">
+                    <!-- Decorative Background Elements -->
+                    <div class="absolute top-0 right-10 w-64 h-64 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+                    <div class="absolute -bottom-8 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 2s"></div>
+                    
+                    <!-- Profile Image Container -->
+                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-2xl overflow-hidden z-10">
+                        <!-- 
+                             NOTE: This src points to the file name you uploaded. 
+                             Ensure 'mypic.jpg' is in the same folder as this HTML file.
+                        -->
+                        <img src="mypic.jpg" 
+                             alt="J. Jaffer Sadiq" 
+                             class="w-fit h-fit object-cover"
+                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e3a8a/ffffff?text=Jaffer+Sadiq';">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">About Me</h2>
+                <div class="w-16 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-gray-600">
+                    <p>
+                        I am a driven individual born in 1984, based in Coimbatore, Tamil Nadu. 
+                        My objective is to learn inquisitively and creatively apply my knowledge to provide innovative solutions for the growth of my surroundings and organization.
+                    </p>
+                    <p>
+                        With a strong background in Commerce (M.Com & B.Com) and hands-on experience in the financial sector, specifically in mortgages and loans, I bring both academic knowledge and practical expertise to the table.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4 mt-6">
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                            <h3 class="font-bold text-gray-900">Location</h3>
+                            <p class="text-sm">Coimbatore, India</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                            <h3 class="font-bold text-gray-900">Languages</h3>
+                            <p class="text-sm">English & Tamil</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                            <h3 class="font-bold text-gray-900">Interests</h3>
+                            <p class="text-sm">Finance, Banking, Service</p>
+                        </div>
+                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                            <h3 class="font-bold text-gray-900">Hobbies</h3>
+                            <p class="text-sm">Music</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                                <i class="fas fa-home text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Housing Loans</h3>
+                            <p class="text-xs text-gray-500">Specialist</p>
+                        </div>
+                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+                                <i class="fas fa-hand-holding-usd text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Mortgages</h3>
+                            <p class="text-xs text-gray-500">Management</p>
+                        </div>
+                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 text-yellow-600">
+                                <i class="fas fa-users text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Customer Relations</h3>
+                            <p class="text-xs text-gray-500">Feedback Oriented</p>
+                        </div>
+                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600">
+                                <i class="fas fa-laptop text-xl"></i>
+                            </div>
+                            <h3 class="font-bold text-lg mb-1">Computer Skills</h3>
+                            <p class="text-xs text-gray-500">Hardware & Office</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Professional Experience</h2>
+                <div class="w-16 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <div class="relative border-l-4 border-blue-200 ml-3 md:ml-6 space-y-12">
+                
+                <!-- Experience Item 1 -->
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow"></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Deputy Manager</h3>
+                                <h4 class="text-secondary font-medium">Vistaar Financial Services P Ltd</h4>
+                            </div>
+                            <div class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
+                                <i class="far fa-calendar-alt mr-2"></i> Dec 2019 - June 2020
+                            </div>
+                        </div>
+                        <div class="mb-4 text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Coimbatore Location
+                        </div>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Responsible for sourcing home loans, loans against property, and mortgage loans.</li>
+                            <li>Successfully handled operations for the Coimbatore location.</li>
+                            <li>Maintained excellent customer feedback and relationships.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="relative pl-8 md:pl-12">
+                    <div class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow"></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Relationship Executive</h3>
+                                <h4 class="text-secondary font-medium">Fedbank Financial Services Ltd</h4>
+                            </div>
+                            <div class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
+                                <i class="far fa-calendar-alt mr-2"></i> Nov 2018 - Aug 2019
+                            </div>
+                        </div>
+                        <div class="mb-4 text-sm text-gray-500 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2"></i> Coimbatore Location
+                        </div>
+                        <ul class="list-disc list-inside text-gray-600 space-y-2">
+                            <li>Specialized in mortgages and loans against property.</li>
+                            <li>Managed sourcing and client acquisition for home loans.</li>
+                            <li>Achieved positive customer satisfaction ratings.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900">Education & Skills</h2>
+                <div class="w-16 h-1 bg-secondary mx-auto mt-4 rounded"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Education Column -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-graduation-cap text-secondary mr-3"></i> Academic Chronicle
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-accent pl-4 py-1">
+                            <h4 class="text-lg font-bold text-gray-900">M.COM (International Business)</h4>
+                            <p class="text-gray-600">Hindustan Arts & Science College, Coimbatore</p>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-sm text-gray-500">March 2009</span>
+                                <span class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">67%</span>
+                            </div>
+                        </div>
+                        <div class="border-l-4 border-accent pl-4 py-1">
+                            <h4 class="text-lg font-bold text-gray-900">B.COM (Computer Applications)</h4>
+                            <p class="text-gray-600">Shri Krishna Arts & Science College, Coimbatore</p>
+                            <div class="flex justify-between items-center mt-1">
+                                <span class="text-sm text-gray-500">April 2006</span>
+                                <span class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">50.7%</span>
+                            </div>
+                        </div>
+                        <div class="border-l-4 border-accent pl-4 py-1">
+                            <h4 class="text-lg font-bold text-gray-900">Diploma in Computer Hardware</h4>
+                            <p class="text-gray-600">Technology Certification</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills Column -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <i class="fas fa-tools text-secondary mr-3"></i> Technical Skills
+                    </h3>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-gray-700">Microsoft Office</span>
+                                <span class="text-sm font-medium text-gray-500">Experienced</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-gray-700">Windows OS (XP, 7, 8, 10)</span>
+                                <span class="text-sm font-medium text-gray-500">Advanced</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-gray-700">Computer Hardware</span>
+                                <span class="text-sm font-medium text-gray-500">Diploma Level</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="font-bold text-gray-800 mt-8 mb-3">Key Competencies</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Mortgage Loans</span>
+                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Property Loans</span>
+                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Customer Service</span>
+                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Banking</span>
+                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Finance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-primary text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
+                    <p class="text-blue-200 mb-8 text-lg">
+                        I am currently open to new opportunities in the financial and banking sectors. 
+                        Feel free to reach out to me via email or phone.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-blue-200">Email</p>
+                                <a href="mailto:Jafferba2002@gmail.com" class="font-semibold hover:text-accent transition">Jafferba2002@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-blue-200">Phone</p>
+                                <a href="tel:+9109994736006" class="font-semibold hover:text-accent transition">09994736006</a>
+                            </div>
+                        </div>
+                       
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p class="text-sm text-blue-200">Address</p>
+                                <p class="font-semibold">2/12A Gandhi Nagar, Kuniamuthur, Coimbatore — 641 008</p>
+                            </div>    
+                        </div>
+                        <div class="mt-6">
+                            <a href="https://wa.me/919994736006" target="_blank" class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                                <span>Chat on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white text-gray-800 rounded-xl p-8 shadow-2xl">
+                    <form action="https://formspree.io/f/xdkyayoy" method="POST" onsubmit="event.preventDefault(); alert('Thank you! This is a demo form.');">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Send a Message</h3>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition" placeholder="John Doe">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Your Email</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition" placeholder="john@example.com">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition h-32" placeholder="How can I help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <p>&copy; 2025 J. Jaffer Sadiq.All rights reserved</p>
+            <p class="mt-4 md:mt-0">Designed by webzio.xyz</p>
+            <div class="flex space-x-4 mt-4 md:mt-0">
+                <a href="https://www.linkedin.com/in/jaffer-sadiq-b9864416" class="hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://twitter.com/jaffersadiqj" class="hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="https://www.instagram.com/jaff_artlens" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
