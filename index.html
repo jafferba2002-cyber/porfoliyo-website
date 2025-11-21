@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JAFFER SADIQ - J. Jaffer Sadiq Portfolio</title>
-    <meta name="description" content="Portfolio of J. Jaffer Sadiq, a Financial Services Professional based in Coimbatore.">
+    <meta name="description"
+        content="Portfolio of J. Jaffer Sadiq, a Financial Services Professional based in Coimbatore.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -16,8 +18,8 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        primary: '#0000FF', // Blue
-                        secondary: '#3b82f6', // Blue
+                        primary: '#23545b', // Transformative Teal
+                        secondary: '#FF5349', // Red Orange
                         accent: '#f59e0b', // Amber
                         light: '#f3f4f6',
                     }
@@ -30,20 +32,39 @@
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
             animation: morph 8s ease-in-out infinite;
         }
+
         @keyframes morph {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            0% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
         }
+
         .fade-in-up {
             animation: fadeInUp 1s ease-out;
         }
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 antialiased">
 
     <!-- Navigation -->
@@ -58,7 +79,8 @@
                     <a href="#about" class="text-gray-600 hover:text-secondary transition">About</a>
                     <a href="#experience" class="text-gray-600 hover:text-secondary transition">Experience</a>
                     <a href="#education" class="text-gray-600 hover:text-secondary transition">Education</a>
-                    <a href="#contact" class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">Contact Me</a>
+                    <a href="#contact"
+                        class="bg-secondary text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">Contact Me</a>
                 </div>
                 <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
@@ -79,44 +101,52 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-24 bg-gradient-to-br from-blue-50 to-indigo-100 overflow-hidden">
+    <section id="home"
+        class="pt-24 pb-12 md:pt-32 md:pb-24 bg-gradient-to-br from-red-50 to-indigo-100 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left fade-in-up">
-                    <span class="inline-block py-1 px-3 rounded-full bg-blue-100 text-primary text-sm font-semibold mb-4">Financial Services Professional</span>
+                    <span
+                        class="inline-block py-1 px-3 rounded-full bg-red-100 text-primary text-sm font-semibold mb-4">Financial
+                        Services Professional</span>
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight mb-4">
                         Hello, I'm <br>
                         <span class="text-secondary">J. Jaffer Sadiq</span>
                     </h1>
                     <p class="text-lg text-gray-600 mb-2 italic">"No way then make a way"</p>
                     <p class="text-gray-600 mb-8 max-w-lg mx-auto md:mx-0">
-                        Dedicated professional with experience in Mortgages, Loans, and Banking. 
-                        I strive to creatively apply knowledge to provide innovative solutions for organizational growth.
+                        Dedicated professional with experience in Mortgages, Loans, and Banking.
+                        I strive to creatively apply knowledge to provide innovative solutions for organizational
+                        growth.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#contact" class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-blue-900 transition shadow-lg flex items-center justify-center gap-2">
+                        <a href="#contact"
+                            class="bg-primary text-white px-8 py-3 rounded-lg hover:bg-red-900 transition shadow-lg flex items-center justify-center gap-2">
                             <i class="fas fa-paper-plane"></i> Get in Touch
                         </a>
-                        <a href="#experience" class="bg-white text-primary border border-gray-300 px-8 py-3 rounded-lg hover:bg-gray-50 transition shadow flex items-center justify-center gap-2">
+                        <a href="#experience"
+                            class="bg-white text-primary border border-gray-300 px-8 py-3 rounded-lg hover:bg-gray-50 transition shadow flex items-center justify-center gap-2">
                             <i class="fas fa-briefcase"></i> View Experience
                         </a>
                     </div>
                 </div>
                 <div class="md:w-1/2 flex justify-center relative">
                     <!-- Decorative Background Elements -->
-                    <div class="absolute top-0 right-10 w-64 h-64 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-                    <div class="absolute -bottom-8 left-10 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style="animation-delay: 2s"></div>
-                    
+                    <div
+                        class="absolute top-0 right-10 w-64 h-64 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse">
+                    </div>
+                    <div class="absolute -bottom-8 left-10 w-64 h-64 bg-red-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"
+                        style="animation-delay: 2s"></div>
+
                     <!-- Profile Image Container -->
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-2xl overflow-hidden z-10">
+                    <div
+                        class="relative w-64 h-64 md:w-80 md:h-80 rounded-full border-4 border-white shadow-2xl overflow-hidden z-10">
                         <!-- 
                              NOTE: This src points to the file name you uploaded. 
                              Ensure 'mypic.jpg' is in the same folder as this HTML file.
                         -->
-                        <img src="mypic.jpg" 
-                             alt="J. Jaffer Sadiq" 
-                             class="w-fit h-fit object-cover"
-                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e3a8a/ffffff?text=Jaffer+Sadiq';">
+                        <img src="mypic.jpg" alt="J. Jaffer Sadiq" class="w-fit h-fit object-cover"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x400/1e3a8a/ffffff?text=Jaffer+Sadiq';">
                     </div>
                 </div>
             </div>
@@ -130,62 +160,73 @@
                 <h2 class="text-3xl font-bold text-gray-900">About Me</h2>
                 <div class="w-16 h-1 bg-secondary mx-auto mt-4 rounded"></div>
             </div>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6 text-gray-600">
                     <p>
-                        I am a driven individual born in 1984, based in Coimbatore, Tamil Nadu. 
-                        My objective is to learn inquisitively and creatively apply my knowledge to provide innovative solutions for the growth of my surroundings and organization.
+                        I am a driven individual born in 1984, based in Coimbatore, Tamil Nadu.
+                        My objective is to learn inquisitively and creatively apply my knowledge to provide innovative
+                        solutions for the growth of my surroundings and organization.
                     </p>
                     <p>
-                        With a strong background in Commerce (M.Com & B.Com) and hands-on experience in the financial sector, specifically in mortgages and loans, I bring both academic knowledge and practical expertise to the table.
+                        With a strong background in Commerce (M.Com & B.Com) and hands-on experience in the financial
+                        sector, specifically in mortgages and loans, I bring both academic knowledge and practical
+                        expertise to the table.
                     </p>
-                    
+
                     <div class="grid grid-cols-2 gap-4 mt-6">
-                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-secondary">
                             <h3 class="font-bold text-gray-900">Location</h3>
                             <p class="text-sm">Coimbatore, India</p>
                         </div>
-                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-secondary">
                             <h3 class="font-bold text-gray-900">Languages</h3>
                             <p class="text-sm">English & Tamil</p>
                         </div>
-                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-secondary">
                             <h3 class="font-bold text-gray-900">Interests</h3>
                             <p class="text-sm">Finance, Banking, Service</p>
                         </div>
-                        <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-secondary">
+                        <div class="p-4 bg-red-50 rounded-lg border-l-4 border-secondary">
                             <h3 class="font-bold text-gray-900">Hobbies</h3>
                             <p class="text-sm">Music</p>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="relative">
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
+                        <div
+                            class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
+                            <div
+                                class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-primary">
                                 <i class="fas fa-home text-xl"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-1">Housing Loans</h3>
                             <p class="text-xs text-gray-500">Specialist</p>
                         </div>
-                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+                        <div
+                            class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
+                            <div
+                                class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
                                 <i class="fas fa-hand-holding-usd text-xl"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-1">Mortgages</h3>
                             <p class="text-xs text-gray-500">Management</p>
                         </div>
-                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
-                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 text-yellow-600">
+                        <div
+                            class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300">
+                            <div
+                                class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 text-yellow-600">
                                 <i class="fas fa-users text-xl"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-1">Customer Relations</h3>
                             <p class="text-xs text-gray-500">Feedback Oriented</p>
                         </div>
-                        <div class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600">
+                        <div
+                            class="bg-white p-6 shadow-lg rounded-xl text-center border border-gray-100 transform hover:-translate-y-1 transition duration-300 mt-8">
+                            <div
+                                class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600">
                                 <i class="fas fa-laptop text-xl"></i>
                             </div>
                             <h3 class="font-bold text-lg mb-1">Computer Skills</h3>
@@ -205,18 +246,21 @@
                 <div class="w-16 h-1 bg-secondary mx-auto mt-4 rounded"></div>
             </div>
 
-            <div class="relative border-l-4 border-blue-200 ml-3 md:ml-6 space-y-12">
-                
+            <div class="relative border-l-4 border-red-200 ml-3 md:ml-6 space-y-12">
+
                 <!-- Experience Item 1 -->
                 <div class="relative pl-8 md:pl-12">
-                    <div class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow"></div>
+                    <div
+                        class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow">
+                    </div>
                     <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
                         <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-800">Deputy Manager</h3>
                                 <h4 class="text-secondary font-medium">Vistaar Financial Services P Ltd</h4>
                             </div>
-                            <div class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
+                            <div
+                                class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
                                 <i class="far fa-calendar-alt mr-2"></i> Dec 2019 - June 2020
                             </div>
                         </div>
@@ -233,14 +277,17 @@
 
                 <!-- Experience Item 2 -->
                 <div class="relative pl-8 md:pl-12">
-                    <div class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow"></div>
+                    <div
+                        class="absolute -left-[10px] top-2 w-6 h-6 bg-secondary rounded-full border-4 border-white shadow">
+                    </div>
                     <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
                         <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
                             <div>
                                 <h3 class="text-xl font-bold text-gray-800">Relationship Executive</h3>
                                 <h4 class="text-secondary font-medium">Fedbank Financial Services Ltd</h4>
                             </div>
-                            <div class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
+                            <div
+                                class="mt-2 md:mt-0 flex items-center text-gray-500 text-sm bg-gray-100 px-3 py-1 rounded-full w-fit">
                                 <i class="far fa-calendar-alt mr-2"></i> Nov 2018 - Aug 2019
                             </div>
                         </div>
@@ -279,7 +326,8 @@
                             <p class="text-gray-600">Hindustan Arts & Science College, Coimbatore</p>
                             <div class="flex justify-between items-center mt-1">
                                 <span class="text-sm text-gray-500">March 2009</span>
-                                <span class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">67%</span>
+                                <span
+                                    class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">67%</span>
                             </div>
                         </div>
                         <div class="border-l-4 border-accent pl-4 py-1">
@@ -287,7 +335,8 @@
                             <p class="text-gray-600">Shri Krishna Arts & Science College, Coimbatore</p>
                             <div class="flex justify-between items-center mt-1">
                                 <span class="text-sm text-gray-500">April 2006</span>
-                                <span class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">50.7%</span>
+                                <span
+                                    class="text-sm font-semibold bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded">50.7%</span>
                             </div>
                         </div>
                         <div class="border-l-4 border-accent pl-4 py-1">
@@ -309,7 +358,7 @@
                                 <span class="text-sm font-medium text-gray-500">Experienced</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 90%"></div>
+                                <div class="bg-red-600 h-2.5 rounded-full" style="width: 90%"></div>
                             </div>
                         </div>
                         <div class="mb-6">
@@ -318,7 +367,7 @@
                                 <span class="text-sm font-medium text-gray-500">Advanced</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 95%"></div>
+                                <div class="bg-red-600 h-2.5 rounded-full" style="width: 95%"></div>
                             </div>
                         </div>
                         <div class="mb-6">
@@ -327,17 +376,25 @@
                                 <span class="text-sm font-medium text-gray-500">Diploma Level</span>
                             </div>
                             <div class="w-full bg-gray-200 rounded-full h-2.5">
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 85%"></div>
+                                <div class="bg-red-600 h-2.5 rounded-full" style="width: 85%"></div>
                             </div>
                         </div>
-                        
+
                         <h4 class="font-bold text-gray-800 mt-8 mb-3">Key Competencies</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Mortgage Loans</span>
-                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Property Loans</span>
-                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Customer Service</span>
-                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Banking</span>
-                            <span class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Finance</span>
+                            <span
+                                class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Mortgage
+                                Loans</span>
+                            <span
+                                class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Property
+                                Loans</span>
+                            <span
+                                class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Customer
+                                Service</span>
+                            <span
+                                class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Banking</span>
+                            <span
+                                class="bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm shadow-sm">Finance</span>
                         </div>
                     </div>
                 </div>
@@ -351,74 +408,84 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <h2 class="text-3xl font-bold mb-6">Get In Touch</h2>
-                    <p class="text-blue-200 mb-8 text-lg">
-                        I am currently open to new opportunities in the financial and banking sectors. 
+                    <p class="text-white mb-8 text-lg">
+                        I am currently open to new opportunities in the financial and banking sectors.
                         Feel free to reach out to me via email or phone.
                     </p>
-                    
+
                     <div class="space-y-4">
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center mr-4">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-blue-200">Email</p>
-                                <a href="mailto:Jafferba2002@gmail.com" class="font-semibold hover:text-accent transition">Jafferba2002@gmail.com</a>
+                                <p class="text-sm text-orange-500">Email</p>
+                                <a href="mailto:Jafferba2002@gmail.com"
+                                    class="font-semibold hover:text-accent transition">Jafferba2002@gmail.com</a>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center mr-4">
                                 <i class="fas fa-phone-alt"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-blue-200">Phone</p>
-                                <a href="tel:+9109994736006" class="font-semibold hover:text-accent transition">09994736006</a>
+                                <p class="text-sm text-orange-500">Phone</p>
+                                <a href="tel:+9109994736006"
+                                    class="font-semibold hover:text-accent transition">09994736006</a>
                             </div>
                         </div>
-                       
+
                         <div class="flex items-center">
-                            <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center mr-4">
+                            <div class="w-10 h-10 bg-red-700 rounded-full flex items-center justify-center mr-4">
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <div>
-                                <p class="text-sm text-blue-200">Address</p>
+                                <p class="text-sm text-orange-500">Address</p>
                                 <p class="font-semibold">2/12A Gandhi Nagar, Kuniamuthur, Coimbatore — 641 008</p>
-                            </div>    
+                            </div>
                         </div>
                         <div class="mt-6">
-                            <a href="https://wa.me/919994736006" target="_blank" class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">
+                            <a href="https://wa.me/919994736006" target="_blank"
+                                class="inline-flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-lg transition shadow-lg">
                                 <i class="fab fa-whatsapp text-xl"></i>
                                 <span>Chat on WhatsApp</span>
                             </a>
                         </div>
                     </div>
                 </div>
-                
-               <div class="bg-white text-gray-800 rounded-xl p-8 shadow-2xl">
-  
-  <h2 class="text-2xl font-bold mb-6 text-gray-800">Send a Message</h2>
-  
-  <form action="https://formspree.io/f/mzzydyyo" method="POST">
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-1" for="name">Your Name</label>
-      <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition" placeholder="your name" required>
-    </div>
 
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Your Email</label>
-      <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition" placeholder="exa@example.com" required>
-    </div>
+                <div class="bg-white text-gray-800 rounded-xl p-8 shadow-2xl">
 
-    <div class="mb-4">
-      <label class="block text-sm font-medium text-gray-700 mb-1" for="message">Message</label>
-      <textarea id="message" name="message" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition h-32" placeholder="How can I help you?" required></textarea>
-    </div>
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Send a Message</h2>
 
-    <button type="submit" class="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md">
-      Send Message
-    </button>
-  </form>
-</div>
+                    <form action="https://formspree.io/f/mzzydyyo" method="POST">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="name">Your Name</label>
+                            <input type="text" id="name" name="name"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition"
+                                placeholder="your name" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="email">Your Email</label>
+                            <input type="email" id="email" name="email"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition"
+                                placeholder="exa@example.com" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1" for="message">Message</label>
+                            <textarea id="message" name="message"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition h-32"
+                                placeholder="How can I help you?" required></textarea>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:bg-red-700 transition shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -427,11 +494,15 @@
     <footer class="bg-gray-900 text-gray-400 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
             <p>&copy; 2025 J. Jaffer Sadiq. All rights reserved</p>
-            <p class="mt-4 md:mt-0"<br>&#10084;Designed by<a href="https://webzio.xyz"target="_blank"class="text-orange-400 hover:underline">webzio.xyz</a></p>
+            <p class="mt-4 md:mt-0" <br>&#10084;Designed by<a href="https://webzio.xyz" target="_blank"
+                    class="text-orange-400 hover:underline">webzio.xyz</a></p>
             <div class="flex space-x-4 mt-4 md:mt-0">
-                <a href="https://www.linkedin.com/in/jaffer-sadiq-b9864416" class="hover:text-white transition"><i class="fab fa-linkedin text-xl"></i></a>
-                <a href="https://twitter.com/jaffersadiqj" class="hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
-                <a href="https://www.instagram.com/jaff_artlens" class="hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="https://www.linkedin.com/in/jaffer-sadiq-b9864416" class="hover:text-white transition"><i
+                        class="fab fa-linkedin text-xl"></i></a>
+                <a href="https://twitter.com/jaffersadiqj" class="hover:text-white transition"><i
+                        class="fab fa-twitter text-xl"></i></a>
+                <a href="https://www.instagram.com/jaff_artlens" class="hover:text-white transition"><i
+                        class="fab fa-instagram text-xl"></i></a>
             </div>
         </div>
     </footer>
@@ -457,4 +528,5 @@
         });
     </script>
 </body>
+
 </html>
