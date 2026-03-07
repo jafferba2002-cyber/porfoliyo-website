@@ -10,6 +10,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script>
         tailwind.config = {
             theme: {
@@ -28,67 +29,6 @@
             }
         }
     </script>
-    <style>
-        body {
-            background-image: url('bacroundimg.webp') !important;
-            background-size: cover !important;
-            background-attachment: fixed !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            min-height: 100vh !important;
-        }
-
-        .blob-shape {
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: morph 8s ease-in-out infinite;
-        }
-
-        @keyframes morph {
-            0% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-
-            50% {
-                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-            }
-
-            100% {
-                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 1s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .bg-image-section {
-            background-image: url('bacroundimg.webp') !important;
-            background-size: cover !important;
-            background-attachment: fixed !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-        }
-
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.25) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border: 1px solid rgba(255, 255, 255, 0.18) !important;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
-        }
-    </style>
 </head>
 
 <body class="text-gray-800 antialiased">
