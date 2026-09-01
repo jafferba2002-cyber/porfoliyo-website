@@ -9,7 +9,6 @@
         content="Portfolio of J. Jaffer Sadiq, a Financial Services Professional based in Coimbatore.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script>
@@ -509,10 +508,6 @@
                                 placeholder="How can I help you?" required></textarea>
                         </div>
 
-                        <div class="mb-4">
-                            <div class="g-recaptcha" data-sitekey="6LcJ8qItAAAAAEaR_bmSud5-NTpnZmOxebTisrNf"></div>
-                        </div>
-
                         <button type="submit"
                             class="w-full bg-secondary text-white font-bold py-3 rounded-lg hover:bg-red-700 transition shadow-md">
                             Send Message
@@ -598,10 +593,6 @@
             return allowedDomains.includes(domain);
         }
 
-        function isCaptchaVerified() {
-            return !!document.querySelector('#g-recaptcha-response')?.value;
-        }
-
         emailInput.addEventListener('input', function () {
             if (this.value.trim() === '') {
                 this.setCustomValidity('');
@@ -630,11 +621,6 @@
                 emailInput.reportValidity();
                 alert('enter valide mail id');
                 emailInput.focus();
-                return;
-            }
-
-            if (!isCaptchaVerified()) {
-                alert('Please complete the CAPTCHA.');
                 return;
             }
 
