@@ -498,7 +498,7 @@
                             <input type="text" id="email" name="email"
                                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent outline-none transition"
                                 placeholder="exa@example.com" required>
-                            <p id="email-error" class="mt-2 text-sm text-red-600 hidden">enter valide mail id</p>
+                            <p id="email-error" class="mt-2 text-sm text-red-600 hidden">Enter a valid email address</p>
                         </div>
 
                         <div class="mb-4">
@@ -521,8 +521,8 @@
     <!-- Footer -->
     <footer class="bg-gray-900 text-gray-400 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-            <p>&copy; 2025 J. Jaffer Sadiq. All rights reserved</p>
-            <p class="mt-4 md:mt-0" <br>&#10084;Designed by<a href="https://webzio.xyz" target="_blank"
+            <p>&copy; 2026 J. Jaffer Sadiq. All rights reserved</p>
+            <p class="mt-4 md:mt-0">&#10084; Designed by <a href="https://webzio.xyz" target="_blank"
                     class="text-orange-400 hover:underline">webzio.xyz</a></p>
             <div class="flex space-x-4 mt-4 md:mt-0">
                 <a href="https://www.linkedin.com/in/jaffer-sadiq-b9864416" class="hover:text-white transition"><i
@@ -549,28 +549,29 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 menu.classList.add('hidden');
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const id = this.getAttribute('href');
+                if (id === '#') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                }
+                const target = document.querySelector(id);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        const allowedDomains = [
-            'gmail.com',
-            'outlook.com',
-            'hotmail.com',
-            'zohomail.in',
-            'hotmail.in',
-            'hotmail.co.in',
-            'jaffersadiq.com'
-        ];
+        // Close Resume dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+            document.querySelectorAll('details[open]').forEach(d => {
+                if (!d.contains(e.target)) d.removeAttribute('open');
+            });
+        });
 
         const contactForm = document.getElementById('contactForm');
         const emailInput = document.getElementById('email');
         const emailError = document.getElementById('email-error');
 
         function showEmailError() {
-            emailError.textContent = 'enter valide mail id';
+            emailError.textContent = 'Enter a valid email address';
             emailError.classList.remove('hidden');
         }
 
@@ -582,15 +583,7 @@
         function isValidEmail(email) {
             if (!email || typeof email !== 'string') return false;
 
-            const trimmed = email.trim();
-            const atIndex = trimmed.lastIndexOf('@');
-
-            if (atIndex <= 0 || atIndex === trimmed.length - 1 || trimmed.indexOf('@') !== atIndex) {
-                return false;
-            }
-
-            const domain = trimmed.slice(atIndex + 1).toLowerCase();
-            return allowedDomains.includes(domain);
+            return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim());
         }
 
         emailInput.addEventListener('input', function () {
@@ -601,7 +594,7 @@
             }
 
             const valid = isValidEmail(this.value);
-            this.setCustomValidity(valid ? '' : 'enter valide mail id');
+            this.setCustomValidity(valid ? '' : 'Enter a valid email address');
 
             if (valid) {
                 clearEmailError();
@@ -613,14 +606,28 @@
         contactForm.addEventListener('submit', function (event) {
             event.preventDefault();
 
+            const nameInput = document.getElementById('name');
+            const messageInput = document.getElementById('message');
+            if (!nameInput.value.trim()) {
+                nameInput.setCustomValidity('Please enter your name');
+                nameInput.reportValidity();
+                nameInput.addEventListener('input', () => nameInput.setCustomValidity(''), { once: true });
+                return;
+            }
+
             const emailValue = emailInput.value.trim();
 
             if (!isValidEmail(emailValue)) {
-                emailInput.setCustomValidity('enter valide mail id');
+                emailInput.setCustomValidity('Enter a valid email address');
                 showEmailError();
-                emailInput.reportValidity();
-                alert('enter valide mail id');
                 emailInput.focus();
+                return;
+            }
+
+            if (!messageInput.value.trim()) {
+                messageInput.setCustomValidity('Please enter a message');
+                messageInput.reportValidity();
+                messageInput.addEventListener('input', () => messageInput.setCustomValidity(''), { once: true });
                 return;
             }
 
