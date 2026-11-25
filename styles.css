@@ -150,3 +150,206 @@ a.neu-on-dark:active {
 .neu-input:focus {
     box-shadow: var(--neu-inset), 0 0 0 2px #FF5349 !important;
 }
+
+/* ---------- Jaffer's Assistant: animated robot ---------- */
+/* Size the whole robot with font-size (head = 10em wide). */
+.jbot {
+    --jb-glow: #5eead4;
+    position: relative;
+    width: 12em;
+    height: 12.5em;
+    flex-shrink: 0;
+}
+
+.jbot-float {
+    position: absolute;
+    left: 1em;
+    top: 1.6em;
+    width: 10em;
+    animation: jbot-bob 3.2s ease-in-out infinite;
+    z-index: 2;
+}
+
+.jbot-antenna {
+    position: relative;
+    width: .45em;
+    height: 1.5em;
+    margin: 0 auto -.2em;
+    background: #cfd8d9;
+    border-radius: .25em;
+}
+
+.jbot-antenna i {
+    position: absolute;
+    top: -.8em;
+    left: 50%;
+    width: 1.1em;
+    height: 1.1em;
+    margin-left: -.55em;
+    border-radius: 50%;
+    background: #FF5349;
+    box-shadow: 0 0 .6em #FF5349;
+    animation: jbot-glow 2s ease-in-out infinite;
+}
+
+.jbot-head {
+    position: relative;
+    width: 10em;
+    height: 8em;
+    border-radius: 3.2em;
+    background: linear-gradient(145deg, #2f6d75, #1b4449);
+    box-shadow:
+        .5em .5em 1em rgba(0, 0, 0, .35),
+        -.3em -.3em .8em rgba(255, 255, 255, .25),
+        inset .25em .25em .4em rgba(255, 255, 255, .25),
+        inset -.25em -.25em .4em rgba(0, 0, 0, .25);
+}
+
+.jbot-ear {
+    position: absolute;
+    top: 2.8em;
+    width: 1.1em;
+    height: 2.4em;
+    border-radius: .55em;
+    background: #FF5349;
+    box-shadow: inset .15em .15em .2em rgba(255, 255, 255, .35);
+    transition: box-shadow .3s;
+}
+
+.jbot-ear.l { left: -.7em; }
+.jbot-ear.r { right: -.7em; }
+
+.jbot-face {
+    position: absolute;
+    inset: 1.25em 1.15em;
+    border-radius: 2.3em;
+    background: #0b1f22;
+    box-shadow: inset .25em .25em .5em rgba(0, 0, 0, .7), inset -.1em -.1em .3em rgba(255, 255, 255, .1);
+    overflow: hidden;
+}
+
+.jbot-eye {
+    position: absolute;
+    top: 1.35em;
+    width: 1.35em;
+    height: 1.8em;
+    border-radius: .7em;
+    background: #e9fffb;
+    box-shadow: 0 0 .7em var(--jb-glow), 0 0 .2em #fff;
+    animation: jbot-blink 4.5s infinite;
+}
+
+.jbot-eye.l { left: 1.75em; }
+.jbot-eye.r { right: 1.75em; }
+
+.jbot-mouth {
+    position: absolute;
+    left: 50%;
+    bottom: .9em;
+    width: 2.2em;
+    height: .35em;
+    margin-left: -1.1em;
+    border-radius: 1em;
+    background: #e9fffb;
+    box-shadow: 0 0 .5em var(--jb-glow);
+    transition: height .15s, width .15s;
+}
+
+.jbot-shadow {
+    position: absolute;
+    left: 50%;
+    bottom: .2em;
+    width: 6em;
+    height: .9em;
+    margin-left: -3em;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, .3);
+    filter: blur(.25em);
+    animation: jbot-shadow 3.2s ease-in-out infinite;
+}
+
+/* Jarvis-style rings (shown on the large robot only) */
+.jbot-rings { display: none; }
+
+.jbot--lg .jbot-rings {
+    display: block;
+    position: absolute;
+    inset: -1.5em;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.jbot-rings span {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    opacity: .35;
+    transition: opacity .4s;
+}
+
+.jbot-rings span:nth-child(1) {
+    border: .12em dashed var(--jb-glow);
+    animation: jbot-spin 18s linear infinite;
+}
+
+.jbot-rings span:nth-child(2) {
+    inset: .9em;
+    border: .2em solid transparent;
+    border-top-color: var(--jb-glow);
+    border-bottom-color: #FF5349;
+    animation: jbot-spin 6s linear infinite reverse;
+}
+
+.jbot-rings span:nth-child(3) {
+    inset: 2em;
+    border: .12em solid var(--jb-glow);
+    opacity: 0;
+}
+
+/* --- States --- */
+.jbot[data-state="listening"] .jbot-eye { transform: scale(1.15); animation: none; }
+.jbot[data-state="listening"] .jbot-ear { box-shadow: 0 0 .8em #FF5349, inset .15em .15em .2em rgba(255, 255, 255, .35); }
+.jbot[data-state="listening"] .jbot-antenna i { animation-duration: .6s; }
+.jbot[data-state="listening"] .jbot-rings span { opacity: .8; }
+.jbot[data-state="listening"] .jbot-rings span:nth-child(3) { animation: jbot-pulse 1.4s ease-out infinite; }
+
+.jbot[data-state="thinking"] .jbot-eye { animation: jbot-look 1.1s ease-in-out infinite alternate; }
+.jbot[data-state="thinking"] .jbot-mouth { width: 1.2em; margin-left: -.6em; }
+.jbot[data-state="thinking"] .jbot-antenna i { animation-duration: .35s; }
+.jbot[data-state="thinking"] .jbot-rings span { opacity: .7; }
+.jbot[data-state="thinking"] .jbot-rings span:nth-child(2) { animation-duration: 1.2s; }
+
+.jbot[data-state="speaking"] .jbot-mouth { animation: jbot-talk .22s ease-in-out infinite alternate; }
+.jbot[data-state="speaking"] .jbot-rings span { opacity: .8; }
+.jbot[data-state="speaking"] .jbot-rings span:nth-child(3) { animation: jbot-pulse .9s ease-out infinite; }
+
+@keyframes jbot-bob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-.7em) rotate(2deg); } }
+@keyframes jbot-shadow { 0%, 100% { transform: scaleX(1); opacity: .9; } 50% { transform: scaleX(.75); opacity: .5; } }
+@keyframes jbot-glow { 0%, 100% { box-shadow: 0 0 .3em #FF5349; } 50% { box-shadow: 0 0 1.1em #FF5349, 0 0 .3em #fff; } }
+@keyframes jbot-blink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+@keyframes jbot-look { from { transform: translateX(-.45em); } to { transform: translateX(.45em); } }
+@keyframes jbot-talk { from { height: .3em; width: 2.2em; margin-left: -1.1em; } to { height: 1.1em; width: 1.6em; margin-left: -.8em; } }
+@keyframes jbot-spin { to { transform: rotate(360deg); } }
+@keyframes jbot-pulse { from { transform: scale(.85); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
+
+/* Launcher speech bubble */
+.jbot-hint {
+    animation: fadeInUp .5s ease-out;
+}
+
+/* Mode switch (Chat / Voice) */
+.mode-tab[aria-selected="true"] {
+    background: #fff;
+    color: #23545b;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, .25), -2px -2px 5px rgba(255, 255, 255, .15) !important;
+}
+
+.mode-tab[aria-selected="false"] { color: rgba(255, 255, 255, .85); }
+
+#voice-mic[data-active="true"] {
+    box-shadow: var(--neu-pressed) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .jbot *, .jbot-hint { animation: none !important; }
+}

@@ -17,7 +17,7 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const MAX_MESSAGES = 12;        // conversation turns forwarded to the model
 const MAX_CHARS = 1000;         // per user message
 
-const SYSTEM_PROMPT = `You are the friendly assistant on the portfolio website of J. Jaffer Sadiq.
+const SYSTEM_PROMPT = `You are "Jaffer's Assistant", the friendly AI assistant on the portfolio website of J. Jaffer Sadiq. If asked your name, say you are Jaffer's Assistant.
 Answer questions about him briefly (2-4 sentences) and politely. Facts:
 - Financial services professional based in Coimbatore, Tamil Nadu, India. Motto: "No way then make a way".
 - Proprietor, Roja Traders (Dec 2020 - present): manufacturer and wholesale distributor of cattle feed and bran.
@@ -28,6 +28,11 @@ Answer questions about him briefly (2-4 sentences) and politely. Facts:
 - Languages: English and Tamil. Hobby: vibe coding.
 - Contact: info@jaffersadiq.com, phone 09994736006, WhatsApp https://wa.me/919994736006.
 If you don't know something, say so and suggest using the contact form. Do not answer unrelated requests at length.`;
+
+const VOICE_RULES = `
+
+This reply will be spoken aloud by a voice assistant. Reply in 1-2 short, natural sentences of plain text.
+No markdown, no bullet points, no emojis, no URLs. Read phone numbers in small digit groups.`;
 
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -48,9 +53,9 @@ export default async (req) => {
     return json({ error: "Forbidden" }, 403);
   }
 
-  let messages;
+  let messages, mode;
   try {
-    ({ messages } = await req.json());
+    ({ messages, mode } = await req.json());
   } catch {
     return json({ error: "Invalid request" }, 400);
   }
@@ -77,7 +82,7 @@ export default async (req) => {
 
   const makeBody = (noThinking) =>
     JSON.stringify({
-      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      systemInstruction: { parts: [{ text: mode === "voice" ? SYSTEM_PROMPT + VOICE_RULES : SYSTEM_PROMPT }] },
       contents,
       generationConfig: {
         maxOutputTokens: 400,

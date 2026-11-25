@@ -535,47 +535,138 @@
         </div>
     </footer>
 
-    <!-- Chatbot -->
+    <!-- Chatbot: Jaffer's Assistant -->
+    <template id="jbot-tpl">
+        <div class="jbot" data-state="idle" aria-hidden="true">
+            <div class="jbot-rings"><span></span><span></span><span></span></div>
+            <div class="jbot-float">
+                <div class="jbot-antenna"><i></i></div>
+                <div class="jbot-head">
+                    <div class="jbot-ear l"></div>
+                    <div class="jbot-ear r"></div>
+                    <div class="jbot-face">
+                        <div class="jbot-eye l"></div>
+                        <div class="jbot-eye r"></div>
+                        <div class="jbot-mouth"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="jbot-shadow"></div>
+        </div>
+    </template>
+
     <div id="chat-widget" class="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
         <div id="chat-panel"
-            class="hidden w-[calc(100vw-2.5rem)] max-w-sm h-[28rem] glass-effect rounded-2xl flex-col overflow-hidden">
-            <div class="bg-primary text-white px-4 py-3 flex items-center justify-between">
-                <div class="flex items-center gap-2 font-semibold">
-                    <i class="fas fa-robot"></i> Ask about Jaffer
+            class="hidden w-[calc(100vw-2.5rem)] max-w-sm h-[32rem] max-h-[calc(100vh-7rem)] glass-effect rounded-2xl flex-col overflow-hidden">
+            <!-- Header -->
+            <div class="bg-primary text-white px-3 py-2 flex items-center gap-2">
+                <div class="jbot-slot" data-size="3" style="font-size:3px"></div>
+                <div class="flex-1 min-w-0">
+                    <div class="font-semibold leading-tight">Jaffer's Assistant</div>
+                    <div id="chat-status" class="text-xs text-white/80 leading-tight">Online</div>
                 </div>
-                <button id="chat-close" class="w-8 h-8 rounded-full neu-on-dark flex items-center justify-center"
+                <div class="flex rounded-full p-1 neu-on-dark bg-primary text-xs font-semibold" role="tablist"
+                    aria-label="Chat mode">
+                    <button type="button" class="mode-tab px-3 py-1 rounded-full transition" role="tab"
+                        data-mode="text" aria-selected="true"><i class="fas fa-keyboard mr-1"></i>Chat</button>
+                    <button type="button" class="mode-tab px-3 py-1 rounded-full transition" role="tab"
+                        data-mode="voice" aria-selected="false"><i class="fas fa-microphone mr-1"></i>Voice</button>
+                </div>
+                <button id="chat-close" class="w-8 h-8 rounded-full neu-on-dark flex items-center justify-center shrink-0"
                     aria-label="Close chat">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="chat-log" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm"></div>
-            <form id="chat-form" class="p-3 flex gap-2">
-                <input id="chat-input" type="text" maxlength="1000" autocomplete="off"
-                    class="flex-1 px-3 py-2 rounded-lg neu-input outline-none text-gray-800"
-                    placeholder="Type a question..." aria-label="Chat message">
-                <button type="submit" id="chat-send"
-                    class="bg-secondary text-white w-10 h-10 rounded-lg neu-btn flex items-center justify-center"
-                    aria-label="Send">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </form>
+
+            <!-- Text mode -->
+            <div id="text-view" class="flex-1 flex flex-col min-h-0">
+                <div id="chat-log" class="flex-1 overflow-y-auto p-4 space-y-3 text-sm" aria-live="polite"></div>
+                <form id="chat-form" class="p-3 flex gap-2">
+                    <input id="chat-input" type="text" maxlength="1000" autocomplete="off"
+                        class="flex-1 px-3 py-2 rounded-lg neu-input outline-none text-gray-800"
+                        placeholder="Type a question..." aria-label="Chat message">
+                    <button type="submit" id="chat-send"
+                        class="bg-secondary text-white w-10 h-10 rounded-lg neu-btn flex items-center justify-center"
+                        aria-label="Send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Voice mode -->
+            <div id="voice-view" class="hidden flex-1 flex-col items-center justify-between p-4 min-h-0 text-center">
+                <div class="jbot-slot jbot--lg mt-4" data-size="12" style="font-size:12px"></div>
+                <div class="w-full space-y-2">
+                    <p id="voice-status" class="font-semibold text-gray-900">Tap the mic and ask me anything</p>
+                    <p id="voice-heard" class="text-sm text-gray-700 italic min-h-[1.25rem]"></p>
+                    <p id="voice-reply"
+                        class="text-sm text-gray-800 bg-white/70 rounded-xl px-3 py-2 neu-raised-sm max-h-24 overflow-y-auto hidden">
+                    </p>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <button id="voice-mic" type="button" data-active="false"
+                        class="bg-secondary text-white w-16 h-16 rounded-full neu-btn flex items-center justify-center"
+                        aria-label="Start talking">
+                        <i class="fas fa-microphone text-2xl"></i>
+                    </button>
+                    <label class="flex items-center gap-2 text-xs text-gray-800 cursor-pointer select-none">
+                        <input id="voice-handsfree" type="checkbox" checked class="accent-[#FF5349]">
+                        Hands-free (keep listening after each answer)
+                    </label>
+                </div>
+            </div>
         </div>
-        <button id="chat-toggle"
-            class="bg-secondary text-white w-14 h-14 rounded-full neu-btn flex items-center justify-center"
-            aria-label="Open chat">
-            <i class="fas fa-comments text-2xl"></i>
-        </button>
+
+        <div class="flex items-end gap-2">
+            <div id="chat-hint"
+                class="hidden jbot-hint bg-white text-gray-800 text-sm px-3 py-2 rounded-xl rounded-br-none neu-raised-sm mb-6">
+                Hi! I'm <b>Jaffer's Assistant</b>. Chat or talk to me!
+            </div>
+            <button id="chat-toggle" class="rounded-full flex items-center justify-center"
+                aria-label="Open Jaffer's Assistant">
+                <span class="jbot-slot" data-size="5.5" style="font-size:5.5px"></span>
+            </button>
+        </div>
     </div>
 
     <script>
-        // Chatbot
+        // Jaffer's Assistant: text + voice chatbot
         (() => {
+            // ---------- Robot ----------
+            const tpl = document.getElementById('jbot-tpl');
+            document.querySelectorAll('.jbot-slot').forEach(slot => {
+                const bot = tpl.content.firstElementChild.cloneNode(true);
+                if (slot.classList.contains('jbot--lg')) bot.classList.add('jbot--lg');
+                slot.appendChild(bot);
+            });
+            const bots = document.querySelectorAll('.jbot');
+            const statusEl = document.getElementById('chat-status');
+            const STATUS = { idle: 'Online', listening: 'Listening...', thinking: 'Thinking...', speaking: 'Speaking...' };
+            function setState(s) {
+                bots.forEach(b => b.dataset.state = s);
+                statusEl.textContent = STATUS[s] || 'Online';
+            }
+
+            // ---------- Elements ----------
             const panel = document.getElementById('chat-panel');
             const log = document.getElementById('chat-log');
             const form = document.getElementById('chat-form');
             const input = document.getElementById('chat-input');
             const send = document.getElementById('chat-send');
+            const textView = document.getElementById('text-view');
+            const voiceView = document.getElementById('voice-view');
+            const tabs = document.querySelectorAll('.mode-tab');
+            const mic = document.getElementById('voice-mic');
+            const vStatus = document.getElementById('voice-status');
+            const vHeard = document.getElementById('voice-heard');
+            const vReply = document.getElementById('voice-reply');
+            const handsFree = document.getElementById('voice-handsfree');
+            const hint = document.getElementById('chat-hint');
+
+            const GREETING = "Hi! I'm Jaffer's Assistant. Ask me about Jaffer's experience, skills, or how to get in touch.";
             const history = [];
+            let mode = 'text';
+            let greetedByVoice = false;
 
             function addMessage(role, text) {
                 const row = document.createElement('div');
@@ -590,51 +681,249 @@
                 return bubble;
             }
 
-            function toggle(open) {
-                panel.classList.toggle('hidden', !open);
-                panel.classList.toggle('flex', open);
-                if (open) {
-                    if (!log.children.length) {
-                        addMessage('bot', "Hi! I'm Jaffer's assistant. Ask me about his experience, skills or how to get in touch.");
+            // ---------- Talk to the server ----------
+            async function ask(text, askMode) {
+                history.push({ role: 'user', text });
+                try {
+                    const res = await fetch('/api/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ messages: history.slice(-12), mode: askMode })
+                    });
+                    const data = await res.json().catch(() => ({}));
+                    if (res.ok && data.reply) {
+                        history.push({ role: 'bot', text: data.reply });
+                        return { ok: true, text: data.reply };
                     }
-                    input.focus();
+                    return {
+                        ok: false,
+                        text: data.error || (res.status === 504
+                            ? 'I took too long to reply. Please try again.'
+                            : 'Sorry, the chat service is not available here (error ' + res.status + ').')
+                    };
+                } catch {
+                    return { ok: false, text: 'Network error. Please check your connection and try again.' };
                 }
             }
 
-            document.getElementById('chat-toggle').addEventListener('click', () => toggle(panel.classList.contains('hidden')));
-            document.getElementById('chat-close').addEventListener('click', () => toggle(false));
-
+            // ---------- Text mode ----------
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const text = input.value.trim();
                 if (!text) return;
                 input.value = '';
                 addMessage('user', text);
-                history.push({ role: 'user', text });
-
                 send.disabled = true;
+                setState('thinking');
                 const pending = addMessage('bot', 'Typing...');
-                try {
-                    const res = await fetch('/api/chat', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ messages: history.slice(-12) })
-                    });
-                    const data = await res.json().catch(() => ({}));
-                    const reply = res.ok && data.reply ? data.reply
-                        : (data.error || (res.status === 504
-                            ? 'The assistant took too long to reply. Please try again.'
-                            : 'Sorry, the chat service is not available here (error ' + res.status + ').')) + ' You can also use the contact form below.';
-                    pending.textContent = reply;
-                    if (res.ok) history.push({ role: 'bot', text: reply });
-                } catch {
-                    pending.textContent = 'Network error. Please try again or use the contact form.';
-                } finally {
-                    send.disabled = false;
-                    input.focus();
-                    log.scrollTop = log.scrollHeight;
-                }
+                const r = await ask(text, 'text');
+                pending.textContent = r.ok ? r.text : r.text + ' You can also use the contact form below.';
+                setState('idle');
+                send.disabled = false;
+                input.focus();
+                log.scrollTop = log.scrollHeight;
             });
+
+            // ---------- Voice: speaking ----------
+            const synth = window.speechSynthesis;
+            let voice = null;
+            function pickVoice() {
+                if (!synth) return;
+                const vs = synth.getVoices().filter(v => /^en/i.test(v.lang));
+                const prefer = [
+                    v => /Google UK English Male/i.test(v.name),
+                    v => /en-GB/i.test(v.lang) && /(male|daniel|george|ryan|arthur|thomas|oliver)/i.test(v.name),
+                    v => /en-GB/i.test(v.lang),
+                    v => /en-IN/i.test(v.lang),
+                    v => /en-US/i.test(v.lang) && /(male|david|guy|christopher|andrew)/i.test(v.name),
+                    () => true
+                ];
+                for (const test of prefer) {
+                    const found = vs.find(test);
+                    if (found) { voice = found; return; }
+                }
+            }
+            if (synth) { pickVoice(); synth.onvoiceschanged = pickVoice; }
+
+            let speakToken = 0;
+            function speak(text, done) {
+                const finish = () => { if (done) done(); };
+                if (!synth) { finish(); return; }
+                synth.cancel();
+                const token = ++speakToken;
+                const clean = text.replace(/[*_#`>~]/g, '').replace(/https?:\/\/\S+/g, 'the link on screen');
+                const parts = clean.match(/[^.!?]+[.!?]*/g) || [clean];
+                let ended = false;
+                parts.forEach((part, i) => {
+                    const u = new SpeechSynthesisUtterance(part.trim());
+                    if (voice) u.voice = voice;
+                    u.lang = voice ? voice.lang : 'en-GB';
+                    u.rate = 1.02;
+                    u.pitch = 0.9;
+                    if (i === 0) u.onstart = () => { if (token === speakToken) setState('speaking'); };
+                    if (i === parts.length - 1) {
+                        u.onend = u.onerror = () => {
+                            if (ended || token !== speakToken) return;
+                            ended = true;
+                            setState('idle');
+                            finish();
+                        };
+                    }
+                    synth.speak(u);
+                });
+                synth.resume();
+            }
+            function stopSpeaking() {
+                speakToken++;
+                if (synth) synth.cancel();
+            }
+
+            // ---------- Voice: listening ----------
+            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            let rec = null;
+            let listening = false;
+            let busy = false;
+
+            function setMic(active) {
+                mic.dataset.active = String(active);
+                mic.setAttribute('aria-label', active ? 'Stop' : 'Start talking');
+                mic.innerHTML = active ? '<i class="fas fa-stop text-2xl"></i>' : '<i class="fas fa-microphone text-2xl"></i>';
+            }
+
+            function startListening() {
+                if (!Recognition) {
+                    vStatus.textContent = 'Voice input is not supported in this browser. Please use Chrome, Edge or Safari, or switch to Chat.';
+                    return;
+                }
+                if (mode !== 'voice' || busy) return;
+                stopSpeaking();
+                rec = new Recognition();
+                rec.lang = 'en-IN';
+                rec.interimResults = true;
+                rec.continuous = false;
+                rec.maxAlternatives = 1;
+                let finalText = '';
+                let failed = false;
+
+                rec.onstart = () => {
+                    listening = true;
+                    setMic(true);
+                    setState('listening');
+                    vStatus.textContent = "I'm listening...";
+                    vHeard.textContent = '';
+                };
+                rec.onresult = (e) => {
+                    let interim = '';
+                    finalText = '';
+                    for (const r of e.results) {
+                        if (r.isFinal) finalText += r[0].transcript;
+                        else interim += r[0].transcript;
+                    }
+                    vHeard.textContent = '"' + (finalText || interim).trim() + '"';
+                };
+                rec.onerror = (e) => {
+                    failed = true;
+                    if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+                        vStatus.textContent = 'Microphone access is blocked. Allow the microphone in your browser settings, then try again.';
+                    } else if (e.error === 'no-speech') {
+                        vStatus.textContent = "I didn't hear anything. Tap the mic to try again.";
+                    } else if (e.error !== 'aborted') {
+                        vStatus.textContent = 'Voice error (' + e.error + '). Tap the mic to try again.';
+                    }
+                };
+                rec.onend = () => {
+                    listening = false;
+                    setMic(false);
+                    rec = null;
+                    const text = finalText.trim();
+                    if (text) handleVoice(text);
+                    else {
+                        setState('idle');
+                        if (!failed) vStatus.textContent = 'Tap the mic and ask me anything';
+                    }
+                };
+                try { rec.start(); } catch { /* already started */ }
+            }
+
+            function stopListening() {
+                if (rec) { try { rec.abort(); } catch { } }
+                rec = null;
+                listening = false;
+                setMic(false);
+            }
+
+            async function handleVoice(text) {
+                busy = true;
+                setState('thinking');
+                vStatus.textContent = 'Thinking...';
+                vHeard.textContent = '"' + text + '"';
+                addMessage('user', text);
+                const r = await ask(text, 'voice');
+                busy = false;
+                addMessage('bot', r.text);
+                vReply.textContent = r.text;
+                vReply.classList.remove('hidden');
+                if (mode !== 'voice') { setState('idle'); return; }
+                vStatus.textContent = r.ok ? "Jaffer's Assistant:" : 'Something went wrong';
+                speak(r.text, () => {
+                    if (mode === 'voice' && r.ok && handsFree.checked) startListening();
+                    else vStatus.textContent = 'Tap the mic and ask me anything';
+                });
+            }
+
+            mic.addEventListener('click', () => {
+                if (listening) { stopListening(); setState('idle'); vStatus.textContent = 'Tap the mic and ask me anything'; return; }
+                if (synth && synth.speaking) { stopSpeaking(); setState('idle'); }
+                startListening();
+            });
+
+            // ---------- Mode switch & open/close ----------
+            function setMode(m) {
+                mode = m;
+                tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.mode === m)));
+                textView.classList.toggle('hidden', m !== 'text');
+                textView.classList.toggle('flex', m === 'text');
+                voiceView.classList.toggle('hidden', m !== 'voice');
+                voiceView.classList.toggle('flex', m === 'voice');
+                if (m === 'text') {
+                    stopListening();
+                    stopSpeaking();
+                    setState('idle');
+                    input.focus();
+                } else {
+                    if (!Recognition) {
+                        vStatus.textContent = 'Voice input is not supported in this browser. Please use Chrome, Edge or Safari, or switch to Chat.';
+                    }
+                    if (!greetedByVoice) {
+                        greetedByVoice = true;
+                        vReply.textContent = GREETING;
+                        vReply.classList.remove('hidden');
+                        speak(GREETING, () => { if (mode === 'voice' && handsFree.checked) startListening(); });
+                    }
+                }
+            }
+            tabs.forEach(t => t.addEventListener('click', () => setMode(t.dataset.mode)));
+
+            function toggle(open) {
+                hint.classList.add('hidden');
+                panel.classList.toggle('hidden', !open);
+                panel.classList.toggle('flex', open);
+                if (open) {
+                    if (!log.children.length) addMessage('bot', GREETING);
+                    if (mode === 'text') input.focus();
+                } else {
+                    stopListening();
+                    stopSpeaking();
+                    setState('idle');
+                }
+            }
+
+            document.getElementById('chat-toggle').addEventListener('click', () => toggle(panel.classList.contains('hidden')));
+            document.getElementById('chat-close').addEventListener('click', () => toggle(false));
+
+            // Friendly hello bubble next to the robot, once per visit
+            setTimeout(() => { if (panel.classList.contains('hidden')) hint.classList.remove('hidden'); }, 2500);
+            setTimeout(() => hint.classList.add('hidden'), 12000);
         })();
     </script>
 
