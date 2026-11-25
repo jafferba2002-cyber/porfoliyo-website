@@ -58,13 +58,18 @@ export default async (req) => {
     return json({ error: "No messages" }, 400);
   }
 
-  const contents = messages
-    .slice(-MAX_MESSAGES)
-    .filter((m) => m && typeof m.text === "string" && m.text.trim())
-    .map((m) => ({
-      role: m.role === "bot" ? "model" : "user",
-      parts: [{ text: m.text.slice(0, MAX_CHARS) }],
-    }));
+  // Build a clean alternating user/model conversation that starts with the user
+  // (back-to-back messages from the same side are merged).
+  const contents = [];
+  for (const m of messages.slice(-MAX_MESSAGES)) {
+    if (!m || typeof m.text !== "string" || !m.text.trim()) continue;
+    const role = m.role === "bot" ? "model" : "user";
+    const text = m.text.trim().slice(0, MAX_CHARS);
+    if (!contents.length && role === "model") continue;
+    const last = contents[contents.length - 1];
+    if (last && last.role === role) last.parts[0].text += "\n" + text;
+    else contents.push({ role, parts: [{ text }] });
+  }
 
   if (!contents.length || contents[contents.length - 1].role !== "user") {
     return json({ error: "Invalid conversation" }, 400);
@@ -117,8 +122,9 @@ export default async (req) => {
     for (const model of [...new Set(MODELS)]) {
       if (deadline - Date.now() < 1000) break;
       result = await callModel(model, true);
-      // Some models don't allow turning thinking off; retry once with defaults.
-      if (result.status === 400 && /thinking/i.test(result.text || "")) {
+      // Some models reject the "thinking off" setting with a generic 400; retry once with defaults.
+      if (result.status === 400) {
+        console.error("Gemini 400 with thinking off", model, result.text);
         result = await callModel(model, false);
       }
       if (result.status === 200) break;
@@ -127,8 +133,9 @@ export default async (req) => {
       let msg = "";
       try { msg = JSON.parse(result.text)?.error?.message || ""; } catch {}
       lastError = `Google API ${result.status}: ${msg || result.text || "unknown error"}`.slice(0, 300);
-      // Bad key, bad request etc. won't be fixed by another model.
-      if (!RETRYABLE.has(result.status)) break;
+      // A bad/blocked key won't be fixed by another model; other 400s might be model-specific.
+      const keyProblem = /api key|permission|billing|location/i.test(msg);
+      if (keyProblem || !(RETRYABLE.has(result.status) || result.status === 400)) break;
       if (result.status === 429 || result.status === 503) await sleep(300);
     }
 
