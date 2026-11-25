@@ -70,38 +70,70 @@ export default async (req) => {
     return json({ error: "Invalid conversation" }, 400);
   }
 
-  const body = JSON.stringify({
-    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-    contents,
-    generationConfig: { maxOutputTokens: 400, temperature: 0.6 },
-  });
+  const makeBody = (noThinking) =>
+    JSON.stringify({
+      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents,
+      generationConfig: {
+        maxOutputTokens: 400,
+        temperature: 0.6,
+        // "Thinking" adds seconds of latency; a short FAQ bot doesn't need it.
+        ...(noThinking ? { thinkingConfig: { thinkingBudget: 0 } } : {}),
+      },
+    });
 
-  try {
-    let res;
-    let lastError = "";
-    for (const model of [...new Set(MODELS)]) {
-      res = await fetch(
+  // Netlify stops synchronous functions after ~10s (that shows up as a 504),
+  // so all attempts together must finish well before that.
+  const deadline = Date.now() + 8500;
+
+  const callModel = async (model, noThinking) => {
+    const remaining = deadline - Date.now();
+    if (remaining < 1000) return { status: 504, timedOut: true, text: "out of time" };
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), Math.min(remaining, 6000));
+    try {
+      const r = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey.trim() },
-          body,
+          body: makeBody(noThinking),
+          signal: ctrl.signal,
         }
       );
-      if (res.ok) break;
+      if (r.ok) return { status: 200, data: await r.json() };
+      return { status: r.status, text: await r.text() };
+    } catch (err) {
+      if (err.name === "AbortError") return { status: 504, timedOut: true, text: "timed out" };
+      throw err;
+    } finally {
+      clearTimeout(timer);
+    }
+  };
 
-      const errText = await res.text();
-      console.error("Gemini error", model, res.status, errText);
+  try {
+    let result = { status: 504, timedOut: true, text: "not attempted" };
+    let lastError = "";
+    for (const model of [...new Set(MODELS)]) {
+      if (deadline - Date.now() < 1000) break;
+      result = await callModel(model, true);
+      // Some models don't allow turning thinking off; retry once with defaults.
+      if (result.status === 400 && /thinking/i.test(result.text || "")) {
+        result = await callModel(model, false);
+      }
+      if (result.status === 200) break;
+
+      console.error("Gemini error", model, result.status, result.text);
       let msg = "";
-      try { msg = JSON.parse(errText)?.error?.message || ""; } catch {}
-      lastError = `Google API ${res.status}: ${msg || "unknown error"}`.slice(0, 300);
+      try { msg = JSON.parse(result.text)?.error?.message || ""; } catch {}
+      lastError = `Google API ${result.status}: ${msg || result.text || "unknown error"}`.slice(0, 300);
       // Bad key, bad request etc. won't be fixed by another model.
-      if (!RETRYABLE.has(res.status)) break;
-      if (res.status !== 404) await sleep(400);
+      if (!RETRYABLE.has(result.status)) break;
+      if (result.status === 429 || result.status === 503) await sleep(300);
     }
 
-    if (!res.ok) {
-      const busy = RETRYABLE.has(res.status) && res.status !== 404;
+    if (result.status !== 200) {
+      const busy = RETRYABLE.has(result.status) && result.status !== 404;
       return json(
         {
           error: busy
@@ -112,7 +144,7 @@ export default async (req) => {
       );
     }
 
-    const data = await res.json();
+    const data = result.data;
     const reply =
       data?.candidates?.[0]?.content?.parts?.map((p) => p.text || "").join("").trim() ||
       "Sorry, I couldn't come up with an answer. Please try the contact form.";
