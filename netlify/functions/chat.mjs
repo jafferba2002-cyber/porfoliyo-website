@@ -2,13 +2,18 @@
 // The API key is read from the GEMINI_API_KEY environment variable set in the
 // Netlify dashboard. It never appears in the browser or in this repository.
 
-// Tried in order; later ones are fallbacks if a model name is retired or unavailable.
+// Tried in order; later ones are fallbacks if a model is busy, rate-limited or retired.
 const MODELS = [
   ...(process.env.GEMINI_MODEL ? [process.env.GEMINI_MODEL.trim()] : []),
   "gemini-flash-latest",
+  "gemini-flash-lite-latest",
   "gemini-2.5-flash",
+  "gemini-2.5-flash-lite",
   "gemini-2.0-flash",
 ];
+// 404 = model not found, 429 = rate limited, 500/503/504 = Google overloaded/temporary.
+const RETRYABLE = new Set([404, 429, 500, 503, 504]);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const MAX_MESSAGES = 12;        // conversation turns forwarded to the model
 const MAX_CHARS = 1000;         // per user message
 
@@ -90,12 +95,21 @@ export default async (req) => {
       let msg = "";
       try { msg = JSON.parse(errText)?.error?.message || ""; } catch {}
       lastError = `Google API ${res.status}: ${msg || "unknown error"}`.slice(0, 300);
-      // Only a missing/unsupported model is worth retrying with another model.
-      if (res.status !== 404) break;
+      // Bad key, bad request etc. won't be fixed by another model.
+      if (!RETRYABLE.has(res.status)) break;
+      if (res.status !== 404) await sleep(400);
     }
 
     if (!res.ok) {
-      return json({ error: `The assistant is unavailable right now (${lastError}).` }, 502);
+      const busy = RETRYABLE.has(res.status) && res.status !== 404;
+      return json(
+        {
+          error: busy
+            ? "The assistant is very busy right now. Please try again in a minute."
+            : `The assistant is unavailable right now (${lastError}).`,
+        },
+        busy ? 503 : 502
+      );
     }
 
     const data = await res.json();
