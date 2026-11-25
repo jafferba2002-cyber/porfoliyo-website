@@ -622,7 +622,7 @@
                     });
                     const data = await res.json().catch(() => ({}));
                     const reply = res.ok && data.reply ? data.reply
-                        : (data.error || 'Sorry, something went wrong.') + ' You can also use the contact form below.';
+                        : (data.error || ('Sorry, the chat service is not available here (error ' + res.status + ').')) + ' You can also use the contact form below.';
                     pending.textContent = reply;
                     if (res.ok) history.push({ role: 'bot', text: reply });
                 } catch {

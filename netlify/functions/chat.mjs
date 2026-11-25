@@ -2,7 +2,13 @@
 // The API key is read from the GEMINI_API_KEY environment variable set in the
 // Netlify dashboard. It never appears in the browser or in this repository.
 
-const MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+// Tried in order; later ones are fallbacks if a model name is retired or unavailable.
+const MODELS = [
+  ...(process.env.GEMINI_MODEL ? [process.env.GEMINI_MODEL.trim()] : []),
+  "gemini-flash-latest",
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+];
 const MAX_MESSAGES = 12;        // conversation turns forwarded to the model
 const MAX_CHARS = 1000;         // per user message
 
@@ -59,23 +65,37 @@ export default async (req) => {
     return json({ error: "Invalid conversation" }, 400);
   }
 
+  const body = JSON.stringify({
+    systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+    contents,
+    generationConfig: { maxOutputTokens: 400, temperature: 0.6 },
+  });
+
   try {
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-        body: JSON.stringify({
-          systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-          contents,
-          generationConfig: { maxOutputTokens: 400, temperature: 0.6 },
-        }),
-      }
-    );
+    let res;
+    let lastError = "";
+    for (const model of [...new Set(MODELS)]) {
+      res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey.trim() },
+          body,
+        }
+      );
+      if (res.ok) break;
+
+      const errText = await res.text();
+      console.error("Gemini error", model, res.status, errText);
+      let msg = "";
+      try { msg = JSON.parse(errText)?.error?.message || ""; } catch {}
+      lastError = `Google API ${res.status}: ${msg || "unknown error"}`.slice(0, 300);
+      // Only a missing/unsupported model is worth retrying with another model.
+      if (res.status !== 404) break;
+    }
 
     if (!res.ok) {
-      console.error("Gemini error", res.status, await res.text());
-      return json({ error: "The assistant is unavailable right now" }, 502);
+      return json({ error: `The assistant is unavailable right now (${lastError}).` }, 502);
     }
 
     const data = await res.json();
